@@ -71,6 +71,7 @@
   height: 100vh;
   background-color: #fff;
 }
+
 .background-line {
   position: fixed;
   height: 75vh;
@@ -114,7 +115,6 @@
       <div class="background-line line-3"></div>
       <div class="background-line line-4"></div>
     </div>
-    <div class="background-container-right"></div>
   </div>
   <div class="container">
     <div class="row main d-flex justify-content-center align-items-center">
@@ -176,7 +176,7 @@ export default {
         {
           type: "text",
           placeholder: "Entrez voutre pseudo",
-          name: "Nickname",
+          name: "username",
           value: "",
         },
         {
@@ -223,12 +223,18 @@ export default {
   },
   mounted() {
     this.type = this.$route.name;
-
-    this.inputes = this.loginInputes;
+    this.switchInputes(this.type);
   },
   methods: {
-    switchInputes() {
-      if (this.type === "login") {
+    switchInputes(target = null) {
+      console.log(
+        target
+        // (this.type === "login" || target === "register") && target !== "login"
+      );
+      if (
+        (this.type === "login" || target === "register") &&
+        target !== "login"
+      ) {
         this.inputes = this.RegisterInputes;
         this.title = "Create-me";
         this.notTitle = "Log-me in";
@@ -241,15 +247,51 @@ export default {
       }
     },
 
-    submit() {
+    async submit() {
       this.loading = true;
       var formData = {};
       this.inputes.forEach((inpute) => {
         formData[inpute.name] = inpute.value;
       });
 
+      console.log(this.type);
+
+      if (this.type === "login") {
+        this.submitLogin(formData);
+      } else {
+        this.submitRegister(formData);
+      }
+    },
+
+    submitLogin(formData) {
+      formData.grant_type = "password";
       axios
-        .post(this.$api + "/" + this.type, formData)
+        .post(process.env.VUE_APP_API_IP + "/login", formData, {
+          auth: {
+            username: process.env.VUE_APP_CLIENT_USERNAME,
+            password: process.env.VUE_APP_CLIENT_SECRET,
+          },
+          headers: {
+            "access-control-expose-headers": "Set-Cookie",
+          },
+        })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          this.formFail(error.response.data.error_description);
+        })
+        .finally(() => {
+          this.loading = false;
+          setTimeout(() => {
+            this.formReact = {};
+          }, 500);
+        });
+    },
+
+    submitRegister(formData) {
+      axios
+        .post(process.env.VUE_APP_API_IP + "/" + this.type, formData)
         .then((response) => {
           this.formSecces(response, this.type);
           this.switchInputes();
@@ -257,7 +299,7 @@ export default {
         })
         .catch((error) => {
           // en cas d’échec de la requête
-          this.formFail(error);
+          this.formFail(error.response.data.messages.message);
         })
         .finally(() => {
           this.loading = false;
@@ -270,7 +312,12 @@ export default {
       this.formReact = {
         "background-color": "rgba(255, 100, 100, 0.6)",
       };
-      this.errors = data.response.data.messages.message;
+
+      if (typeof data == "string") {
+        this.errors = [data];
+        return;
+      }
+      this.errors = data;
     },
     formSecces(data, type = null) {
       this.formReact = {
