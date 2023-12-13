@@ -2,6 +2,7 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 import { BootstrapVue3, IconsPlugin } from "bootstrap-vue-3";
+import "./assets/global.css";
 // import { IconsPlugin } from "bootstrap-icons";
 
 import "bootstrap/dist/css/bootstrap.min.css";

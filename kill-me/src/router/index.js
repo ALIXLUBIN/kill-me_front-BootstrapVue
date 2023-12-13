@@ -20,12 +20,17 @@ const routes = [
   {
     path: "/login",
     name: "login",
-    component: Login,
+    component: () => import("../views/LoginRegister.vue"),
   },
   {
     path: "/register",
     name: "register",
-    component: () => import("../views/Register.vue"),
+    component: () => import("../views/LoginRegister.vue"),
+  },
+  {
+    path: "/battle",
+    name: "battle",
+    component: () => import("../views/Battle.vue"),
   },
 ];
 

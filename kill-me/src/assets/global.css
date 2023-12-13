@@ -1,0 +1,53 @@
+:root {
+  --color-1: rgb(255, 200, 0);
+  --color-2: hsl(157, 98%, 50%);
+  --color-3: #023dfd;
+  --color-4: rgb(252, 3, 3);
+}
+
+.bg-color-1 {
+  background-color: var(--color-1);
+}
+
+.bg-color-2 {
+  background-color: var(--color-2);
+}
+
+.bg-color-3 {
+  background-color: var(--color-3);
+}
+
+.bg-color-4 {
+  background-color: var(--color-4);
+}
+
+.card-blur {
+  transition: all 0.5s ease-in-out;
+  background-color: rgba(232, 232, 232, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  border: 1px solid rgba(196, 195, 195, 0.6);
+  padding: 20px;
+}
+
+@keyframes colorfulShadow {
+  0% {
+    box-shadow: 0 5px 4px var(--color-1);
+  }
+  25% {
+    box-shadow: 0 5px 4px var(--color-2);
+  }
+  50% {
+    box-shadow: 0 5px 4px var(--color-3);
+  }
+  75% {
+    box-shadow: 0 5px 4px var(--color-4);
+  }
+  100% {
+    box-shadow: 0 5px 4px var(--color-1);
+  }
+}
+
+.shadow-me {
+  /* animation: colorfulShadow 5s infinite; */
+}

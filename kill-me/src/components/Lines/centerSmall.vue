@@ -1,26 +1,30 @@
 <style>
 :root {
-  --base-spaceing: 50vh;
+  --spaceing-small: 10vh;
+  --color-1: rgb(255, 200, 0);
+  --color-2: hsl(157, 98%, 50%);
+  --color-3: #023dfd;
+  --color-4: rgb(252, 3, 3);
 }
 
 .background-line.line-1 {
-  top: calc(var(--base-spaceing) * -1 - 15vh);
+  top: calc(var(--spaceing-small) * -1);
   background-color: var(--color-1);
 }
 
 .background-line.line-2 {
-  top: calc(var(--base-spaceing) * 0 + 10vh);
+  top: calc(var(--spaceing-small) * 0);
 
   background-color: var(--color-2);
 }
 
 .background-line.line-3 {
-  top: calc(var(--base-spaceing) * 1 + 10vh);
+  top: calc(var(--spaceing-small) * 1);
 
   background-color: var(--color-3);
 }
 .background-line.line-4 {
-  top: calc(var(--base-spaceing) * 2 + 10vh);
+  top: calc(var(--spaceing-small) * 2);
 
   background-color: var(--color-4);
 }
@@ -63,7 +67,6 @@
   position: fixed;
   top: 0;
   height: 100vh; /* Couvrira toute la hauteur de la page */
-  background-color: #fd0202; /* Couleur de l'arrière-plan */
 }
 
 .background-container-right {
@@ -77,7 +80,7 @@
 
 .background-line {
   position: fixed;
-  height: 75vh;
+  height: 10vh;
   width: 200%;
   transform: rotate(140deg);
   box-shadow: 0 15px 15px rgba(0, 0, 0, 0.2);
