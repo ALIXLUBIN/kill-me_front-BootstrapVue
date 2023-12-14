@@ -36,7 +36,7 @@ export default {
         maxStrength: 1.5,
         defense: 1,
         maxDefense: 0.5,
-        attack: [
+        attacks: [
           {
             id: 1,
             name: "Punch",

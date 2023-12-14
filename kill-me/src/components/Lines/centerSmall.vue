@@ -1,10 +1,6 @@
 <style>
 :root {
   --spaceing-small: 10vh;
-  --color-1: rgb(255, 200, 0);
-  --color-2: hsl(157, 98%, 50%);
-  --color-3: #023dfd;
-  --color-4: rgb(252, 3, 3);
 }
 
 .background-line.line-1 {
@@ -83,7 +79,7 @@
   height: 10vh;
   width: 200%;
   transform: rotate(140deg);
-  box-shadow: 0 15px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 </style>
 

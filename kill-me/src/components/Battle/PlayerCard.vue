@@ -60,6 +60,13 @@
     </div>
     <div class="row">
       <h3>Attaque</h3>
+      <div class="col-6 button" v-for="(attacks, key) in character.attacks" >
+        <Button></Button>
+        <div class="row">
+          <div class="col-6">{{ attacks.name }}</div>
+          <div class="col-6">{{ attacks.damage }}</div>
+        </div>
+      </div>
     </div>
   </div>
   Card
@@ -67,14 +74,20 @@
 </template>
 
 <script>
+import Button from "@/components/Button.vue";
 export default {
   name: "Card",
+  components: {
+    Button,
+  },
   props: {
     character: {
       type: Object,
       required: true,
     },
   },
-  mounted() {},
+  mounted() {
+    // console.log(this.character.attacks);
+  },
 };
 </script>
