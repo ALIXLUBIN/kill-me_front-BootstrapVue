@@ -6,19 +6,25 @@
 }
 
 .bg-color-1 {
-  background-color: var(--color-1);
+  background-color: var(--color-1) !important;
 }
 
 .bg-color-2 {
-  background-color: var(--color-2);
+  background-color: var(--color-2) !important;
 }
 
 .bg-color-3 {
-  background-color: var(--color-3);
+  background-color: var(--color-3) !important;
+}
+
+/* TODO: changer la couleur pour faire le version plus claire */
+.bg-color-3-light {
+  background-color: var(--color-3) !important;
+  /* background-color: hsl(from var(--color-3) h s calc(l - 5%)) !important; */
 }
 
 .bg-color-4 {
-  background-color: var(--color-4);
+  background-color: var(--color-4) !important;
 }
 
 .card-blur {

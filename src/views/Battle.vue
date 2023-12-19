@@ -29,13 +29,14 @@ export default {
         name: "Barry",
         type: 1,
         health: 100,
-        maxHealth: 100,
-        mana: 100,
+        maxHealth: 1000,
+        mana: 70,
+        manaRegen: 40,
         maxMana: 100,
-        strength: 1,
-        maxStrength: 1.5,
-        defense: 1,
-        maxDefense: 0.5,
+        strength: 40,
+        maxStrength: 70,
+        shild: 10,
+        maxShild: 35,
         attacks: [
           {
             id: 1,
@@ -44,6 +45,7 @@ export default {
             typeName: "Physical",
             damage: 10,
             manaCost: 0,
+            shildPiercing: 25,
           },
           {
             id: 2,
@@ -52,6 +54,7 @@ export default {
             type: 1,
             damage: 15,
             manaCost: 0,
+            shildPiercing: 0,
           },
           {
             id: 3,
@@ -60,6 +63,7 @@ export default {
             typeName: "Magical",
             damage: 20,
             manaCost: 10,
+            shildPiercing: 50,
           },
           {
             id: 4,
@@ -68,6 +72,7 @@ export default {
             typeName: "Magical",
             damage: 25,
             manaCost: 15,
+            shildPiercing: 0,
           },
         ],
       },
