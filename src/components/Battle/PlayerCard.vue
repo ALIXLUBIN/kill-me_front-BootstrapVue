@@ -25,12 +25,12 @@
   <span class="character">
     <h2 class="character-name">{{ character.name }}</h2>
   </span>
-  <div class="container-fuid card-blur kill-me-border shadow-me">
+  <div class="container-fuid card-blur">
     <div class="stats">
       <div class="row">
         <div class="col-2 text-end">
           PV
-          <font-awesome-icon :icon="['fas', 'plus']" />
+          <font-awesome-icon :icon="['fas', 'heart']" />
         </div>
         <div class="col-10">
           <div
@@ -85,7 +85,7 @@
                   character.manaRegen % (character.maxMana - character.mana)
                 "
               >
-                {{ character.manaRegen % (character.maxMana - character.mana) }}
+                + {{ character.manaRegen % (character.maxMana - character.mana) }}
               </div>
             </div>
           </div>
@@ -147,13 +147,13 @@
     <div class="row">
       <h3>Attaque</h3>
       <div class="col-6 p-2" v-for="(attack, key) in character.attacks">
-        <Button :attack="attack"></Button>
+        <Button :attack="attack" @click="this.attack(attack.id)"></Button>
       </div>
     </div>
     <div class="row">
       <h3>Spécialité</h3>
       <div class="col-6 p-2" v-for="(spell, key) in character.spells">
-        <ButtonSpell :spell="spell"></ButtonSpell>
+        <Button :attack="spell" @click="this.attack(attack.id)"></Button>
       </div>
     </div>
   </div>
@@ -174,6 +174,11 @@ export default {
   },
   mounted() {
     // console.log(this.character.attacks);
+  },
+  methods: {
+    attack(id) {
+      console.log(id);
+    },
   },
 };
 </script>

@@ -119,20 +119,9 @@ svg {
           {{ attack.name }}
         </div>
         <div class="row justify-content-evenly">
-          <div class="col-auto" v-show="attack.manaCost">
-            {{ attack.text }}
-          </div>
-          <div class="col-auto" v-show="attack.manaCost">
-            <font-awesome-icon :icon="['fas', 'wand-sparkles']" />
-            {{ attack.manaCost }}
-          </div>
-          <div class="col-auto" v-show="attack.damage">
-            <font-awesome-icon :icon="['fas', 'hand-back-fist']" />
-            {{ attack.damage }}
-          </div>
-          <div class="col-auto" v-show="attack.shildPiercing">
-            <font-awesome-icon :icon="['fas', 'shield-virus']" />
-            {{ attack.shildPiercing }}%
+          <div class="col-auto" v-for="(effect, key) in attack.effects">
+            <font-awesome-icon :icon="['fas', effect.icon]" />
+            {{ effect.value }}
           </div>
         </div>
       </div>

@@ -29,7 +29,7 @@ export default {
         name: "Barry",
         type: 1,
         health: 100,
-        maxHealth: 1000,
+        maxHealth: 100,
         mana: 70,
         manaRegen: 40,
         maxMana: 100,
@@ -42,23 +42,44 @@ export default {
             id: 1,
             name: "Punch",
             type: 1,
-            typeName: "Physical",
-            damage: 10,
-            manaCost: 0,
-            shildPiercing: 25,
+            effects: [
+              {
+                icon: "hand-back-fist",
+                value: '10',
+              },
+              {
+                icon: "shield-virus",
+                value: '25%',
+              }
+            ],
           },
           {
             id: 2,
             name: "Kick",
-            typeName: "Physical",
-            type: 1,
-            damage: 15,
-            manaCost: 0,
-            shildPiercing: 0,
+            effects: [
+              {
+                icon: "hand-back-fist",
+                value: '15',
+              }
+            ],
           },
           {
             id: 3,
             name: "Fireball",
+            effects: [
+              {
+                icon: "wand-sparkles",
+                value: '-20',
+              },
+              {
+                icon: "hand-back-fist",
+                value: '10',
+              },
+              {
+                icon: "shield-virus",
+                value: '50%',
+              }
+            ],
             type: 2,
             typeName: "Magical",
             damage: 20,
@@ -68,11 +89,46 @@ export default {
           {
             id: 4,
             name: "Ice Shard",
-            type: 2,
-            typeName: "Magical",
-            damage: 25,
-            manaCost: 15,
-            shildPiercing: 0,
+            effects: [
+              {
+                icon: "wand-sparkles",
+                value: '15',
+              },
+              {
+                icon: "hand-back-fist",
+                value: '25',
+              }
+            ],
+          },
+        ],
+        spells: [
+          {
+            id: 5,
+            name: "Heal",
+            effects: [
+              {
+                icon: "wand-sparkles",
+                value: '-15',
+              },
+              {
+                icon: "heart",
+                value: '+10',
+              }
+            ]
+          },
+          {
+            id: 6,
+            name: "Shield",
+            effects: [
+              {
+                icon: "wand-sparkles",
+                value: '-10',
+              },
+              {
+                icon: "shield-cat",
+                value: '+10',
+              }
+            ]
           },
         ],
       },
