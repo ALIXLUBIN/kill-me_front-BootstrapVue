@@ -1,5 +1,5 @@
 <template>
-  <BackGround size="light" />
+  <BackGround type="centerSmall" />
   <div class="container-fluid py-5">
     <div class="row d-md-flex flex-md-row-reverse">
       <div class="col-12 col-md-3">
@@ -14,7 +14,7 @@
 
 <script>
 import PlayerCard from "@/components/Battle/PlayerCard.vue";
-import BackGround from "@/components/Lines/centerSmall.vue";
+import BackGround from "@/components/BackGround.vue";
 
 export default {
   name: "Battle",
@@ -45,12 +45,12 @@ export default {
             effects: [
               {
                 icon: "hand-back-fist",
-                value: '10',
+                value: "10",
               },
               {
                 icon: "shield-virus",
-                value: '25%',
-              }
+                value: "25%",
+              },
             ],
           },
           {
@@ -59,8 +59,8 @@ export default {
             effects: [
               {
                 icon: "hand-back-fist",
-                value: '15',
-              }
+                value: "15",
+              },
             ],
           },
           {
@@ -69,16 +69,16 @@ export default {
             effects: [
               {
                 icon: "wand-sparkles",
-                value: '-20',
+                value: "-20",
               },
               {
                 icon: "hand-back-fist",
-                value: '10',
+                value: "10",
               },
               {
                 icon: "shield-virus",
-                value: '50%',
-              }
+                value: "50%",
+              },
             ],
             type: 2,
             typeName: "Magical",
@@ -92,12 +92,12 @@ export default {
             effects: [
               {
                 icon: "wand-sparkles",
-                value: '15',
+                value: "15",
               },
               {
                 icon: "hand-back-fist",
-                value: '25',
-              }
+                value: "25",
+              },
             ],
           },
         ],
@@ -108,13 +108,13 @@ export default {
             effects: [
               {
                 icon: "wand-sparkles",
-                value: '-15',
+                value: "-15",
               },
               {
                 icon: "heart",
-                value: '+10',
-              }
-            ]
+                value: "+10",
+              },
+            ],
           },
           {
             id: 6,
@@ -122,13 +122,13 @@ export default {
             effects: [
               {
                 icon: "wand-sparkles",
-                value: '-10',
+                value: "-10",
               },
               {
                 icon: "shield-cat",
-                value: '+10',
-              }
-            ]
+                value: "+10",
+              },
+            ],
           },
         ],
       },

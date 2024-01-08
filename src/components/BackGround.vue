@@ -1,28 +1,50 @@
 <style>
 :root {
-  --base-spaceing: 50vh;
+  /* --base-spaceing: 50vh; */
 }
 
 .background-line.line-1 {
-  top: calc(var(--base-spaceing) * -1 - 15vh);
+  top: calc(var(--base-spaceing) * -1);
   background-color: var(--color-1);
 }
 
 .background-line.line-2 {
-  top: calc(var(--base-spaceing) * 0 + 10vh);
+  top: calc(var(--base-spaceing) * 0);
 
   background-color: var(--color-2);
 }
 
 .background-line.line-3 {
-  top: calc(var(--base-spaceing) * 1 + 10vh);
+  top: calc(var(--base-spaceing) * 1);
 
   background-color: var(--color-3);
 }
 .background-line.line-4 {
-  top: calc(var(--base-spaceing) * 2 + 10vh);
+  top: calc(var(--base-spaceing) * 2);
 
   background-color: var(--color-4);
+}
+
+.background {
+  transition: all 0.5s ease-in-out;
+
+  --base-spaceing: 50vh;
+  --base-height: 50vh;
+  --base-rotate: 140deg;
+  --base-offset: -60%;
+}
+
+.background-line {
+  transition: all 0.5s ease-in-out;
+  position: fixed;
+  height: var(--base-height);
+  width: 200%;
+  transform: rotate(var(--base-rotate));
+  box-shadow: 0 15px 15px rgba(0, 0, 0, 0.2);
+}
+
+.background-line {
+  right: var(--base-offset);
 }
 </style>
 
@@ -34,10 +56,6 @@
 /* @media only screen and (max-width: 992px) { */
 .background-container-left {
   width: 100%;
-}
-
-.background-line {
-  right: -60%;
 }
 
 .background-container-right {
@@ -63,29 +81,12 @@
   position: fixed;
   top: 0;
   height: 100vh; /* Couvrira toute la hauteur de la page */
-  background-color: #fd0202; /* Couleur de l'arrière-plan */
-}
-
-.background-container-right {
-  position: fixed;
-  top: 0;
-  left: 50%;
-  width: 50%;
-  height: 100vh;
-  background-color: #fff;
-}
-
-.background-line {
-  position: fixed;
-  height: 75vh;
-  width: 200%;
-  transform: rotate(140deg);
-  box-shadow: 0 15px 15px rgba(0, 0, 0, 0.2);
+  /* background-color: #fd0202; Couleur de l'arrière-plan */
 }
 </style>
 
 <template>
-  <div class="background">
+  <div class="background" ref="background">
     <div class="background-container-left">
       <div class="background-line line-1"></div>
       <div class="background-line line-2"></div>
@@ -99,5 +100,67 @@
 <script>
 export default {
   name: "BackGround",
+
+  data() {
+    return {
+      types: {
+        centerSmall: {
+          spaceing: "10vh",
+          height: "10vh",
+          rotate: "140deg",
+          offset: "-60%",
+        },
+        cover: {
+          spaceing: "60vh",
+          height: "60vh",
+          rotate: "140deg",
+          offset: "-50%",
+        },
+      },
+    };
+  },
+
+  props: {
+    type: {
+      type: String,
+      default: "centerSmall",
+    },
+  },
+
+  mounted() {
+    this.changeLine();
+  },
+  methods: {
+    changeLine() {
+      console.log(this.type);
+      const background = this.$refs.background;
+      background.style.setProperty(
+        "--base-spaceing",
+        this.types[this.type].spaceing
+      );
+      background.style.setProperty(
+        "--base-height",
+        this.types[this.type].height
+      );
+      background.style.setProperty(
+        "--base-rotate",
+        this.types[this.type].rotate
+      );
+      background.style.setProperty(
+        "--base-offset",
+        this.types[this.type].offset
+      );
+    },
+  },
+
+  beforeRouteEnter(to, from, next) {
+    next((vm) => {
+      vm.changeLine();
+    });
+  },
+  beforeRouteUpdate(to, from, next) {
+    this.changeLine();
+    next();
+  },
 };
 </script>

@@ -37,6 +37,16 @@
   padding: 20px;
 }
 
+.li-blur {
+  transition: all 0.5s ease-in-out;
+  background-color: rgba(200, 200, 200, 0.4);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  border: 1px solid rgba(178, 178, 178, 0.6);
+  margin: 3px;
+  list-style: none;
+  padding: 5px;
+}
 @keyframes colorfulShadow {
   0% {
     box-shadow: 0 5px 4px var(--color-1);

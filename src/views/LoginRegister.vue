@@ -12,7 +12,7 @@
 </style>
 
 <template>
-  <Background />
+  <Background type="cover" />
   <div class="container">
     <div class="row main d-flex justify-content-center align-items-center">
       <div
