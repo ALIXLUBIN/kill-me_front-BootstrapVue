@@ -6,7 +6,9 @@ ul {
 }
 
 .li-character {
-  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  overflow: hidden; 
   background-color: rgba(254, 254, 254);
   backdrop-filter: blur(10px);
   border-radius: 10px;
@@ -25,11 +27,11 @@ ul {
   list-style: none;
   padding: 5px;
   opacity: 0.5;
-  cursor: not-allowed;
 }
 
 .li-active {
-  margin-left: 15px;
+  transform: translate(15px);
+  /* margin-left: 15px; */
   box-shadow: 0 0 5px var(--color-2) !important;
   font-weight: bold;
 }
@@ -50,17 +52,18 @@ ul {
         <p>Choisisez votre personnage ici</p>
         <ul class="m-0">
           <li
-            class="li-character shadow d-flex"
+            class="li-character shadow d-flex align-items-center"
             v-for="character in characters"
             :key="character.id"
             :class="{
               'li-disabled': !character.owned,
-              'li-active': character.active,
+              'li-active': selectCharacter == character.id,
             }"
-            @click="selectCharacter(character.id)"
+            @click="selectCharacter = character.id"
           >
             {{ character.name }}
-            <smallLine v-if="character.active" />
+            {{  }}
+            <smallLine :show="selectCharacter == character.id" />
           </li>
         </ul>
       </div>
@@ -192,7 +195,7 @@ export default {
     // TODO: remove this
     // <button @click="test">test</button>
     test() {
-      axios.post(process.env.VUE_APP_API_IP + "/home", "test", {
+      axios.get(process.env.VUE_APP_API_IP + "/character", "test", {
         withCredentials: true,
         headers: {
           "access-control-expose-headers": "Set-Cookie",

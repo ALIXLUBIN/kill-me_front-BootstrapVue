@@ -65,6 +65,7 @@
 
 <script>
 import Background from "@/components/BackGround.vue";
+import { guest } from "@/plugins/axios";
 import axios from "axios";
 export default {
   name: "LoginRegister",
@@ -166,8 +167,8 @@ export default {
 
     submitLogin(formData) {
       formData.grant_type = "password";
-      axios
-        .post(process.env.VUE_APP_API_IP + "/login", formData, {
+      guest
+        .post("/user/login", formData, {
           auth: {
             username: process.env.VUE_APP_CLIENT_USERNAME,
             password: process.env.VUE_APP_CLIENT_SECRET,
