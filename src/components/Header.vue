@@ -90,11 +90,15 @@ nav {
       id="navbarNav"
     >
       <ul class="navbar-nav">
-        <li class="nav-item">
+        <!-- // TODO: metre quand on est logg -->
+        <li class="nav-item" v-show="!isLoggedIn">
           <RouterLink to="/login" class="nav-link"> Login </RouterLink>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" v-show="!isLoggedIn">
           <RouterLink to="/register" class="nav-link"> Register </RouterLink>
+        </li>
+        <li class="nav-item" v-show="isLoggedIn">
+          <RouterLink to="/profile" class="nav-link"> Profile </RouterLink>
         </li>
       </ul>
     </div>
@@ -111,20 +115,9 @@ nav {
 <script>
 export default {
   name: "Header",
-  data() {
-    return {
-      dismissSecs: 10,
-      dismissCountDown: 0,
-      login: true,
-      user: {},
-    };
-  },
-  methods: {
-    countDownChanged(dismissCountDown) {
-      this.dismissCountDown = dismissCountDown;
-    },
-    showAlert() {
-      this.dismissCountDown = this.dismissSecs;
+  computed: {
+    isLoggedIn() {
+      return sessionStorage.getItem("logged") === "true";
     },
   },
 };

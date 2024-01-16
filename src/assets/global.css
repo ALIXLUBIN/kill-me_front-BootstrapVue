@@ -68,3 +68,7 @@
 .shadow-me {
   /* animation: colorfulShadow 5s infinite; */
 }
+
+.position-absolute {
+  position: absolute !important;
+}

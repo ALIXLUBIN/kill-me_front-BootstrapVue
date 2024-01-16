@@ -65,8 +65,10 @@
 
 <script>
 import Background from "@/components/BackGround.vue";
-import { guest } from "@/plugins/axios";
+import { guest, auth } from "@/plugins/axios";
 import axios from "axios";
+import router from "@/router";
+
 export default {
   name: "LoginRegister",
   components: {
@@ -79,13 +81,13 @@ export default {
           type: "text",
           placeholder: "Entrez voutre pseudo",
           name: "username",
-          value: "",
+          value: "ticket2",
         },
         {
           type: "password",
           placeholder: "Enter your password",
           name: "password",
-          value: "",
+          value: "boop1234boop",
         },
       ],
       RegisterInputes: [
@@ -129,10 +131,6 @@ export default {
   },
   methods: {
     switchInputes(target = null) {
-      console.log(
-        target
-        // (this.type === "login" || target === "register") && target !== "login"
-      );
       if (
         (this.type === "login" || target === "register") &&
         target !== "login"
@@ -156,7 +154,7 @@ export default {
         formData[inpute.name] = inpute.value;
       });
 
-      console.log(this.type);
+      // console.log(this.type);
 
       if (this.type === "login") {
         this.submitLogin(formData);
@@ -169,6 +167,7 @@ export default {
       formData.grant_type = "password";
       guest
         .post("/user/login", formData, {
+          withCredentials: true,
           auth: {
             username: process.env.VUE_APP_CLIENT_USERNAME,
             password: process.env.VUE_APP_CLIENT_SECRET,
@@ -178,7 +177,22 @@ export default {
           },
         })
         .then((response) => {
-          console.log(response);
+          this.formSucces(response, this.type);
+          localStorage.setItem("user_id", response.data.user_id);
+          localStorage.setItem("nickname", response.data.nickname);
+          localStorage.setItem("score", response.data.score);
+          localStorage.setItem("money", response.data.money);
+          sessionStorage.setItem("logged", true);
+
+          // var conn = new WebSocket("ws://192.168.1.17:8081");
+
+          // conn.onopen = function (e) {
+          // 	console.log("Connection established!");
+          // };
+
+          // app.config.globalProperties.$conn = conn;
+
+          router.push("/");
         })
         .catch((error) => {
           this.formFail(error.response.data.error_description);
@@ -195,7 +209,7 @@ export default {
       axios
         .post(process.env.VUE_APP_API_IP + "/" + this.type, formData)
         .then((response) => {
-          this.formSecces(response, this.type);
+          this.formSucces(response, this.type);
           this.switchInputes();
           // this.$router.push({ name: "Login" });
         })
@@ -221,16 +235,16 @@ export default {
       }
       this.errors = data;
     },
-    formSecces(data, type = null) {
+    formSucces(data, type = null) {
       this.formReact = {
         "background-color": "rgba(103, 255, 76, 0.6)",
       };
 
-      if (type === "login") {
+      if (type !== "login") {
         this.inputes[0].value = data.data.nickname;
       }
 
-      console.log(data);
+      // console.log(data);
       // this.errors = data.;
     },
   },

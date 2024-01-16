@@ -132,7 +132,6 @@ export default {
   },
   methods: {
     changeLine() {
-      console.log(this.type);
       const background = this.$refs.background;
       background.style.setProperty(
         "--base-spaceing",

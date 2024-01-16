@@ -30,6 +30,11 @@ const routes = [
     name: "battle",
     component: () => import("../views/Battle.vue"),
   },
+  {
+    path: "/profile",
+    name: "profile",
+    component: () => import("../views/Profile.vue"),
+  }
 ];
 
 const router = createRouter({
