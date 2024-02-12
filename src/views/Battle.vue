@@ -1,12 +1,12 @@
 <template>
   <BackGround type="centerSmall" />
   <div class="container-fluid py-5">
-    <div class="row d-md-flex flex-md-row-reverse">
-      <div class="col-12 col-md-3">
-        <PlayerCard :character="character" />
-      </div>
+    <div class="row d-md-flex">
       <div class="col-12 col-md-9">
-        <PlayerCard :character="character" />
+        <PlayerCard :character="self" v-if="self" />
+      </div>
+      <div class="col-12 col-md-3">
+        <PlayerCard :character="ennemy" v-if="ennemy" />
       </div>
     </div>
   </div>
@@ -15,6 +15,7 @@
 <script>
 import PlayerCard from "@/components/Battle/PlayerCard.vue";
 import BackGround from "@/components/BackGround.vue";
+import { auth } from "@/plugins/axios.js";
 
 export default {
   name: "Battle",
@@ -24,10 +25,11 @@ export default {
   },
   data() {
     return {
+      self: {},
+      ennemy: {},
       character: {
         id: 1,
         name: "Barry",
-        type: 1,
         health: 100,
         maxHealth: 100,
         mana: 70,
@@ -35,8 +37,8 @@ export default {
         maxMana: 100,
         strength: 40,
         maxStrength: 70,
-        shild: 10,
-        maxShild: 35,
+        shield: 10,
+        maxshield: 35,
         attacks: [
           {
             id: 1,
@@ -84,7 +86,7 @@ export default {
             typeName: "Magical",
             damage: 20,
             manaCost: 10,
-            shildPiercing: 50,
+            shieldPiercing: 50,
           },
           {
             id: 4,
@@ -133,6 +135,69 @@ export default {
         ],
       },
     };
+  },
+
+  mounted() {
+    auth
+      .get("/battle")
+      .then((response) => {
+        this.getCharacter(response.data["slef"].character_id).then((data) => {
+          this.self = data;
+        });
+        this.getCharacter(response.data["ennemy"].character_id).then((data) => {
+          this.ennemy = data;
+        });
+      })
+      .catch((error) => {
+        console.log(error.response.data.messages);
+        if (error.response.data.messages.error == "notInGame") {
+          this.eventBus.emit("show-toast", "Vous n'êtes pas en jeu");
+          // this.$router.push('/');
+        }
+      });
+
+    try {
+      this.$conn.onmessage = (e) => {
+        const data = JSON.parse(e.data);
+        console.log(data);
+
+        if (data.messages == "founedPlayer") {
+          this.$router.push("/battle");
+        }
+      };
+    } catch (error) {
+      this.reconnect();
+    }
+  },
+
+  methods: {
+    async getCharacter(id) {
+      const response = await auth.get("/character/" + id);
+      return response.data;
+    },
+
+    attack(id) {
+      auth.post("battle/attack/" + id);
+    },
+
+    reconnect() {
+      console.log("reconnect");
+      try {
+        var conn = new WebSocket("ws://192.168.1.17:8081");
+
+        conn.onerror = (error) => {
+          this.eventBus.emit("show-toastSocket");
+        };
+
+        conn.onopen = function (e) {
+          console.log("Connection established!");
+        };
+
+        app.config.globalProperties.$conn = conn;
+      } catch (error) {
+        this.eventBus.emit("show-toastSocket");
+      }
+    },
   },
 };
 </script>

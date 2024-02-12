@@ -68,7 +68,7 @@
 			<div class="col-6">
 				<div class="row">
 					<div class="col-4 text-end">
-						Shild <font-awesome-icon :icon="['fas', 'shield-cat']" />
+						Shield <font-awesome-icon :icon="['fas', 'shield-cat']" />
 					</div>
 					<div class="col-8">
 						<div
@@ -80,10 +80,10 @@
 							<div
 								class="progress-bar bg-color-1 text-dark"
 								:style="{
-									width: (character.shild / character.maxShild) * 100 + '%',
+									width: (character.shield / character.maxshield) * 100 + '%',
 								}"
 							>
-								{{ character.shild }} / {{ character.maxShild }}
+								{{ character.shield }} / {{ character.maxshield }}
 							</div>
 						</div>
 					</div>

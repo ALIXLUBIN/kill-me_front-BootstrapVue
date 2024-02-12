@@ -39,6 +39,7 @@ button:is(:hover, :focus-visible) {
   --hover: 1;
   /*   border-color: transparent !important; */
 }
+
 button:active {
   --active: 1;
 }
@@ -50,15 +51,12 @@ button:before {
   border-radius: calc(var(--radius) - var(--border));
   background: hsl(0 0% 100% / calc(1 - var(--hover, 0) * 0.25));
   /* background: grey; */
-  background: conic-gradient(
-    from calc(var(--rx, 0) * 180deg) at calc(var(--x, 0) * 100%)
-      calc(var(--y, 0) * 100%),
-    hsl(10 90% 70%),
-    hsl(140 80% 70%),
-    hsl(320 80% 70%),
-    hsl(210 80% 70%),
-    hsl(10 80% 70%)
-  );
+  background: conic-gradient(from calc(var(--rx, 0) * 180deg) at calc(var(--x, 0) * 100%) calc(var(--y, 0) * 100%),
+      hsl(10 90% 70%),
+      hsl(140 80% 70%),
+      hsl(320 80% 70%),
+      hsl(210 80% 70%),
+      hsl(10 80% 70%));
   filter: saturate(0.4);
   opacity: var(--hover, 0);
   transition: opacity 0.2s;
@@ -111,7 +109,7 @@ svg {
 </style>
 
 <template>
-  <button class="control">
+  <button @click="throwAttack(attack.id)" class="control">
     <span class="backdrop"></span>
     <div class="text">
       <div class="container-fluid p-1">
@@ -119,9 +117,24 @@ svg {
           {{ attack.name }}
         </div>
         <div class="row justify-content-evenly">
-          <div class="col-auto" v-for="(effect, key) in attack.effects">
-            <font-awesome-icon :icon="['fas', effect.icon]" />
-            {{ effect.value }}
+          <div class="col-auto" v-show="attack.text">
+            {{ attack.text }}
+          </div>
+          <div class="col-auto" v-show="attack.heal">
+            <font-awesome-icon :icon="['fas', 'heart']" />
+            +{{ attack.heal }}
+          </div>
+          <div class="col-auto" v-show="attack.manaCost">
+            <font-awesome-icon :icon="['fas', 'wand-sparkles']" />
+            -{{ attack.manaCost }}
+          </div>
+          <div class="col-auto" v-show="attack.damage">
+            <font-awesome-icon :icon="['fas', 'hand-back-fist']" />
+            {{ attack.damage }}
+          </div>
+          <div class="col-auto" v-show="attack.shieldPercing">
+            <font-awesome-icon :icon="['fas', 'shield-virus']" />
+            {{ attack.shieldPercing }}%
           </div>
         </div>
       </div>
@@ -130,6 +143,8 @@ svg {
 </template>
 
 <script>
+import { auth } from "@/plugins/axios.js";
+
 export default {
   name: "buton",
   data() {
@@ -158,5 +173,11 @@ export default {
 
     document.body.addEventListener("pointermove", UPDATE);
   },
+
+  methods: {
+    throwAttack(id) {
+      auth.post('battle/attack/' + id)
+    },
+  }
 };
 </script>

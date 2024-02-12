@@ -58,11 +58,9 @@ export default {
     },
   },
   mounted() {
-    // console.log(this.character.attacks);
   },
   methods: {
     attack(id) {
-      // console.log(id);
     },
   },
 };
