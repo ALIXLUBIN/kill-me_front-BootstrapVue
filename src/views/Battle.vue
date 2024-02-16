@@ -158,11 +158,15 @@ export default {
 
     try {
       this.$conn.onmessage = (e) => {
-        const data = JSON.parse(e.data);
-        console.log(data);
+        console.log(e)
+        if (e.data != 'undefined') {
 
-        if (data.messages == "founedPlayer") {
-          this.$router.push("/battle");
+          const data = JSON.parse(e.data);
+          console.log(data);
+          
+          if (data.messages == "founedPlayer") {
+            this.$router.push("/battle");
+          }
         }
       };
     } catch (error) {
