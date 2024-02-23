@@ -68,6 +68,8 @@ import Background from "@/components/BackGround.vue";
 import { guest, auth } from "@/plugins/axios";
 import axios from "axios";
 import router from "@/router";
+import { socket } from "@/socket.js";
+
 
 export default {
   name: "LoginRegister",
@@ -191,6 +193,8 @@ export default {
           // };
 
           // app.config.globalProperties.$conn = conn;
+
+          socket.connect();
 
           router.push("/");
         })

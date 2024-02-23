@@ -11,9 +11,15 @@ export const state = reactive({
 const URL =
   process.env.NODE_ENV === "production"
     ? undefined
-    : "http://192.168.1.17:3000";
+    : "ws://192.168.1.17:3000";
 
-export const socket = io(URL);
+export const socket = io(URL, {
+    withCredentials: true,
+    reconnection: true,
+    reconnectionAttempts: 5,
+    reconnectionDelay: 500,
+    reconnectionDelayMax: 5000,
+  });
 
 socket.on("connect", () => {
   state.connected = true;

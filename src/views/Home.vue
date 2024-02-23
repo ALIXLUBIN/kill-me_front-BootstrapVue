@@ -124,6 +124,7 @@ import BackGround from "@/components/BackGround.vue";
 import smallLine from "@/components/Lines/smallLines.vue";
 import caracterStats from "@/components/Battle/caracterStats.vue";
 import { socket } from "@/socket.js";
+import router from "@/router";
 
 export default {
   name: "Home",
@@ -138,6 +139,7 @@ export default {
       selectCharacter: 0,
       characters: {},
       owned: {},
+      waitForPlayer: false,
     };
   },
 
@@ -148,22 +150,10 @@ export default {
   },
 
   created() {
-    if (sessionStorage.getItem("logged")) {
-      try {
-        let conn = new WebSocket(process.env.VUE_APP_WS_IP);
-
-        conn.onopen = function (e) {
-          console.log("Connection established!");
-        };
-
-        app.config.globalProperties.$conn = conn;
-      } catch (error) {
-        this.console.log("pas de WS");
-      }
-    }
   },
 
   beforeMount() {
+
     try {
       this.$conn.onmessage = function (e) {
         console.log(e.data);
@@ -210,40 +200,11 @@ export default {
         .then((response) => {
           if (response.data.messages == "waiting") {
             socket.on("playerFound", (data) => {
-              // this.$router.push("/battle");
-
-              auth
-                .post("/joinBattle/joinAfterWait")
-                .then((response) => {
-                  this.$router.push("/battle");
-                })
-                .catch((error) => {});
+              socket.off("playerFound");
+              router.push("/battle");
             });
-
-            // try {
-            //   this.$conn.onmessage = (e) => {
-            //     console.log(e);
-            //     if (e.data != "undefined") {
-            //       const data = JSON.parse(e.data);
-            //       console.log(data);
-            //       auth
-            //         .post("/joinBattle/joinAfterWait")
-            //         .then((response) => {
-            //           this.$router.push("/battle");
-            //         })
-            //         .catch((error) => {
-            //           this.eventBus.emit(
-            //             "show-toast",
-            //             error.response.data.messages.error
-            //           );
-            //         });
-            //     }
-            //   };
-            // } catch (error) {
-            //   this.reconnect();
-            // }
           } else if (response.data.messages == "battle_created") {
-            socket.emit("playerFound", "boop");
+            router.push("/battle");
           } else if (response.data.messages == "inGame") {
             this.$router.push("/battle");
           }
