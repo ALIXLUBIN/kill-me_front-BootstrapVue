@@ -127,6 +127,12 @@ export default {
     },
   },
 
+  watch: {
+    type() {
+      this.changeLine();
+    },
+  },
+
   mounted() {
     this.changeLine();
   },

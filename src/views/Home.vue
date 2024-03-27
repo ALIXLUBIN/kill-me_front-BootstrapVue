@@ -38,7 +38,7 @@ ul {
 </style>
 
 <template>
-  <BackGround />
+  <BackGround :type="this.line"/>
   <div class="container">
     <div class="row">
       <div class="col-12 p-3">
@@ -135,6 +135,7 @@ export default {
   },
   data() {
     return {
+      line: "centerSmall",
       player: {},
       selectCharacter: 0,
       characters: {},
@@ -199,6 +200,9 @@ export default {
         .post("/joinBattle", { character_id: this.selectCharacter })
         .then((response) => {
           if (response.data.messages == "waiting") {
+            this.waitForPlayer = true;
+            this.line = "cover";
+            this.eventBus.emit("show-toast", "En attente d'un joueur");
             socket.on("playerFound", (data) => {
               socket.off("playerFound");
               router.push("/battle");
@@ -210,8 +214,7 @@ export default {
           }
         })
         .catch((error) => {
-          console.log(error);
-          // this.eventBus.emit("show-toast", error.response.data.messages.error);
+          this.eventBus.emit("show-toast", error.response.data.messages.error);
         });
     },
     buyCharacter() {

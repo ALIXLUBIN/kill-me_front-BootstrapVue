@@ -58,9 +58,7 @@ nav {
 </style>
 
 <template>
-  <nav
-    class="mx-2 p-2 navbar navbar-expand-lg rounded-bottom d-flex justify-content-between"
-  >
+  <nav class="position-sticky mx-2 p-2 navbar navbar-expand-lg rounded-bottom d-flex justify-content-between">
     <div class="d-flex justify-content-between align-items-stretch">
       <RouterLink to="/" class="logo navbar-brand">
         <div class="d-flex align-items-center">
@@ -74,21 +72,10 @@ nav {
         </div>
       </RouterLink>
     </div>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarNav"
-      aria-controls="navbarNav"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div
-      class="collapse navbar-collapse d-lg-flex justify-content-end"
-      id="navbarNav"
-    >
+    <div class="collapse navbar-collapse d-lg-flex justify-content-end" id="navbarNav">
       <ul class="navbar-nav">
         <!-- // TODO: metre quand on est logg -->
         <li class="nav-item" v-show="!isLoggedIn">

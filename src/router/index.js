@@ -31,6 +31,11 @@ const routes = [
     component: () => import("../views/Battle.vue"),
   },
   {
+    path: "/endGame",
+    name: "endGame",
+    component: () => import("../views/endGame.vue"),
+  },
+  {
     path: "/profile",
     name: "profile",
     component: () => import("../views/Profile.vue"),

@@ -30,16 +30,16 @@
 
 .card-blur {
   transition: all 0.5s ease-in-out;
-  background-color: rgba(200, 200, 200, 0.6);
+  background-color: rgba(232, 232, 232, 0.6);
   backdrop-filter: blur(10px);
   border-radius: 10px;
-  border: 1px solid rgba(178, 178, 178, 0.6);
+  /* border: 1px solid rgba(178, 178, 178, 0.6); */
   padding: 20px;
 }
 
 .li-blur {
   transition: all 0.5s ease-in-out;
-  background-color: rgba(200, 200, 200, 0.4);
+  background-color: rgba(232, 232, 232, 0.6);
   backdrop-filter: blur(10px);
   border-radius: 10px;
   border: 1px solid rgba(178, 178, 178, 0.6);

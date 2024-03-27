@@ -106,10 +106,20 @@ svg {
   color: hsl(0 0% 98%);
   background: hsl(0 0% 10%);
 }
+
+.disable {
+  /* pointer-events: none; */
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.noClick {
+  pointer-events: none;
+}
 </style>
 
 <template>
-  <button @click="throwAttack(attack.id)" class="control">
+  <button @click="throwAttack(attack.id)" class="control" :class="{ 'disable': !enbale, 'noClick': (this.onClick[0] == 'false')}">
     <span class="backdrop"></span>
     <div class="text">
       <div class="container-fluid p-1">
@@ -157,6 +167,16 @@ export default {
       type: Object,
       required: true,
     },
+    enbale: {
+      type: Boolean,
+      required: false,
+      default: true,
+    },
+    onClick: {
+      type: Boolean,
+      required: false,
+      default: true,
+    },
   },
   mounted() {
     const CONTROLS = document.querySelectorAll("button");
@@ -176,7 +196,17 @@ export default {
 
   methods: {
     throwAttack(id) {
-      auth.post('battle/attack/' + id)
+      if (this.onClick[0] == "false") {
+        console.log('bha non');
+        return;
+      }
+      auth.post('battle/attack/' + id).catch((error) => {
+
+        if (error.response.data.messages.error == "notYourTrun") {
+          this.eventBus.emit("show-toast", "Ce n'est pas votre tour.");
+          // this.$router.push('/');
+        }
+      });
     },
   }
 };
