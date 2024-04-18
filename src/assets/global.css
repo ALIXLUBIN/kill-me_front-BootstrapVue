@@ -1,8 +1,8 @@
 :root {
-  --color-1: rgb(255, 200, 0);
-  --color-2: hsl(157, 98%, 50%);
+  --color-1: #ffc800;
+  --color-2: #03fc9d;
   --color-3: #023dfd;
-  --color-4: rgb(252, 3, 3);
+  --color-4: #fc0303;
 }
 
 .bg-color-1 {

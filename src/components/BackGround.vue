@@ -1,7 +1,4 @@
 <style>
-:root {
-  /* --base-spaceing: 50vh; */
-}
 
 .background-line.line-1 {
   top: calc(var(--base-spaceing) * -1);

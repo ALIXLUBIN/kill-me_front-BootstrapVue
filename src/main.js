@@ -9,6 +9,9 @@ import { fas } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 import "bootstrap";
+const bootstrap = require("bootstrap");
+window.bootstrap = bootstrap;
+
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 const app = createApp(App);

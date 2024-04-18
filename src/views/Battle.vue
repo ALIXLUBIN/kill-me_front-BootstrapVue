@@ -3,7 +3,6 @@
   <div class="container-fluid py-5">
     <div class="row d-md-flex">
       <div class="col-12 col-md-9">
-        <div>{{ self.user_id == turn ? 'Votre tour' : 'Pas ton tour' }}</div>
         <PlayerCard :character="self" :turn="self.user_id == turn" v-if="self" />
       </div>
       <div class="col-12 col-md-3">

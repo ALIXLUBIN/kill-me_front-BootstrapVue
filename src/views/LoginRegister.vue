@@ -21,7 +21,7 @@
         class="col-md-6 card-blur shadow-lg"
       >
         <h1>{{ title }}</h1>
-        <form @submit.prevent="submit">
+        <form action=""  @submit.prevent="submit">
           <div class="mb-3" v-for="(inpute, key) in inputes" :key="key">
             <label :for="inpute.name" class="form-label">{{
               inpute.name
@@ -184,7 +184,9 @@ export default {
           localStorage.setItem("nickname", response.data.nickname);
           localStorage.setItem("score", response.data.score);
           localStorage.setItem("money", response.data.money);
+
           sessionStorage.setItem("logged", true);
+          sessionStorage.setItem("scope", response.data.scope);
 
           // var conn = new WebSocket("ws://192.168.1.17:8081");
 

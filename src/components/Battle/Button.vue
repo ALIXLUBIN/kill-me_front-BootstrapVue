@@ -142,9 +142,9 @@ svg {
             <font-awesome-icon :icon="['fas', 'hand-back-fist']" />
             {{ attack.damage }}
           </div>
-          <div class="col-auto" v-show="attack.shieldPercing">
+          <div class="col-auto" v-show="attack.shieldPiercing">
             <font-awesome-icon :icon="['fas', 'shield-virus']" />
-            {{ attack.shieldPercing }}%
+            {{ attack.shieldPiercing }}%
           </div>
         </div>
       </div>
