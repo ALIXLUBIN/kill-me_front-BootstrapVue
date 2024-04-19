@@ -83,13 +83,13 @@ export default {
           type: "text",
           placeholder: "Entrez voutre pseudo",
           name: "username",
-          value: "ticket2",
+          value: "",
         },
         {
           type: "password",
           placeholder: "Enter your password",
           name: "password",
-          value: "boop1234boop",
+          value: "",
         },
       ],
       RegisterInputes: [
