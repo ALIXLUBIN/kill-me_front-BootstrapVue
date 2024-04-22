@@ -1,50 +1,57 @@
+<style>
+.main {
+  height: 100vh;
+}
+</style>
+
 <template>
-  <ConnectionManager />
-  <ConnectionState />
-  <button @click="emmit()">TEST</button>
-  <!-- <div class="container">
-    <div class="row">
-      <div class="">
-        <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label"
-            >Email address</label
-          >
-          <input
-            type="email"
-            class="form-control"
-            id="exampleFormControlInput1"
-            placeholder="name@example.com"
-          />
+  <Background />
+  <div class="container">
+    <div class="row main d-flex justify-content-center align-items-center">
+      <form action="">
+        <h3>{{ nickname }}</h3>
+        <div class="mt-5 card-blur">
+          <div class="mt-3">
+            <label for="exampleFormControlInput1" class="form-label">Adresse mail</label>
+            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="" />
+          </div>
         </div>
-      </div>
+        <h3 class="mt-3">Changement de mot de passe</h3>
+        <div class="mt-5 card-blur">
+        <div class="mt-3">
+            <label for="exampleFormControlInput1" class="form-label">Ancien mot de passe</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" />
+          </div>
+          <div class="mt-3">
+            <label for="exampleFormControlInput1" class="form-label">Nouveau mot de passe</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" />
+          </div>
+          <div class="mt-3">
+            <label for="exampleFormControlInput1" class="form-label">Confirmer mot de passe</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" />
+          </div>
+          <button type="submit" class="mt-3 btn btn-primary">Envoyer</button>
+        </div>
+      </form>
     </div>
-  </div> -->
+  </div>
 </template>
 
 <script>
-import ConnectionManager from "@/components/ConnectionManager.vue";
-import ConnectionState from "@/components/ConnectionState.vue";
-import { socket } from "@/socket";
+import BackGround from "@/components/BackGround.vue";
+import smallLine from "@/components/Lines/smallLines.vue";
+
 
 export default {
   name: "Profile",
-
+  data() {
+    return {
+      nickname: "pute"
+    };
+  },
   components: {
-    ConnectionManager,
-    ConnectionState,
-  },
-
-  mounted() {
-    socket.on("test", () => {
-      console.log("oui");
-    });
-  },
-
-  methods: {
-    emmit() {
-      console.log("emitting");
-      socket.emit("test", "Hello from the client");
-    },
+    BackGround,
+    smallLine
   },
 };
 </script>
