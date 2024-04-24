@@ -5,7 +5,7 @@
       <div class="col-12 col-md-9">
         <PlayerCard :character="self" :turn="self.user_id == turn" v-if="self" />
       </div>
-      <div class="col-12 col-md-3">
+      <div class="col-12 col-md-3 order-first order-md-last">
         <PlayerCard :character="ennemy" :type="false" :lastAttack="ennemy.last_attack" v-if="ennemy" />
       </div>
     </div>
@@ -48,6 +48,7 @@ export default {
       .then((response) => {
         this.getCharacter(response.data["self"].character_id).then((data) => {
           this.self = data;
+          this.self.nickname = response.data["self"].nickname;
           this.self.mana = response.data["self"].mana;
           this.self.user_id = response.data["self"].user_id;
           this.self.character_id = response.data["self"].character_id;
@@ -61,6 +62,7 @@ export default {
         this.getCharacter(response.data["ennemy"].character_id).then((data) => {
           this.ennemy = data;
 
+          this.ennemy.nickname = response.data["ennemy"].nickname;
           this.ennemy.mana = response.data["ennemy"].mana;
           this.ennemy.user_id = response.data["ennemy"].user_id;
           this.ennemy.character_id = response.data["ennemy"].character_id;

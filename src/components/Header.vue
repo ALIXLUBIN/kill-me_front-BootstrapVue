@@ -3,6 +3,7 @@ nav {
   position: sticky;
   top: 0;
   background-color: rgba(232, 232, 232, 0.6);
+  z-index: 1000;
 
   /* background-color: rgba(211, 211, 211, 0.7); */
   backdrop-filter: blur(10px);

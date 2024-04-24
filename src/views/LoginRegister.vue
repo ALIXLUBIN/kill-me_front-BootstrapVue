@@ -242,9 +242,14 @@ export default {
       this.errors = data;
     },
     formSucces(data, type = null) {
+      this.errors = null;
       this.formReact = {
         "background-color": "rgba(103, 255, 76, 0.6)",
       };
+
+      if (this.type === "register") {
+        this.eventBus.emit("show-toastSuccess", "Compte créé avec succès");
+      }
 
       if (type !== "login") {
         this.inputes[0].value = data.data.nickname;

@@ -341,7 +341,7 @@ export default {
 				this.AttckInputes[7].value = selectAttack.id;
 
 				this.selectCharacter = id;
-			} else if (!idß) {
+			} else if (!id) {
 				this.Inpute.forEach((inpute) => {
 					inpute.value = "";
 				});

@@ -130,21 +130,25 @@ svg {
           <div class="col-auto" v-show="attack.text">
             {{ attack.text }}
           </div>
-          <div class="col-auto" v-show="attack.heal">
+          <div class="col-auto" v-show="attack.heal > 0" title="Vous fait regagnier des PV">
             <font-awesome-icon :icon="['fas', 'heart']" />
             +{{ attack.heal }}
           </div>
-          <div class="col-auto" v-show="attack.manaCost">
+          <div class="col-auto" v-show="attack.manaCost > 0" title="Coût de l'attaque en mana">
             <font-awesome-icon :icon="['fas', 'wand-sparkles']" />
             -{{ attack.manaCost }}
           </div>
-          <div class="col-auto" v-show="attack.damage">
+          <div class="col-auto" v-show="attack.damage > 0" title="Dégas infligé par l'attaque">
             <font-awesome-icon :icon="['fas', 'hand-back-fist']" />
             {{ attack.damage }}
           </div>
-          <div class="col-auto" v-show="attack.shieldPiercing">
+          <div class="col-auto" v-show="attack.shieldPiercing > 0" title="Pourcentage de bouclier ennmie ignoré">
             <font-awesome-icon :icon="['fas', 'shield-virus']" />
             {{ attack.shieldPiercing }}%
+          </div>
+          <div class="col-auto" v-show="attack.shieldRepair > 0" title="Réparation du bouclier">
+            <font-awesome-icon :icon="['fas', 'shield']" />
+            +{{ attack.shieldRepair }}%
           </div>
         </div>
       </div>

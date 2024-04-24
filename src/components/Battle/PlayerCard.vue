@@ -23,7 +23,7 @@
 
 <template>
 	<span class="character">
-		<h2 class="character-name">{{ character.name }}</h2>
+		<h2 class="character-name">{{ character.name }} - <span class="fw-lighter">{{ character.nickname }}</span></h2>
 	</span>
 	<div class="container-fuid card-blur">
 		<caracterStats :character="character" />

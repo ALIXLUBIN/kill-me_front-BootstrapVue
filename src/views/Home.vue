@@ -38,12 +38,12 @@ ul {
 </style>
 
 <template>
-  <BackGround :type="this.line"/>
+  <BackGround :type="this.line" />
   <div class="container">
     <div class="row">
       <div class="col-12 p-3">
         <h2>Bonjour {{ player.nickname }}</h2>
-        <p>Score: {{ player.score }} • Thunes: {{ player.money }}</p>
+        <p>Score: {{ player.score }} <font-awesome-icon :icon="['fas', 'star']" /> • Argent: {{ player.money }} <font-awesome-icon :icon="['fas', 'bitcoin-sign']" /></p>
       </div>
     </div>
     <div class="row">
@@ -51,26 +51,16 @@ ul {
         <h3>Vos personnages:</h3>
         <p>Choisisez votre personnage ici</p>
         <ul class="m-0">
-          <li
-            class="li-character shadow d-flex align-items-center"
-            v-for="(ownedCarater, index) in owned.true"
-            :class="{
+          <li class="li-character shadow d-flex align-items-center" v-for="(ownedCarater, index) in owned.true" :class="{
               'li-active': selectCharacter == ownedCarater,
-            }"
-            @click="selectCharacter = ownedCarater"
-          >
+            }" @click="selectCharacter = ownedCarater">
             {{ characters[ownedCarater].name }}
             <smallLine :show="selectCharacter == ownedCarater" />
           </li>
 
-          <li
-            class="li-character shadow d-flex align-items-center li-disabled"
-            v-for="(ownedCarater, index) in owned.false"
-            :class="{
+          <li class="li-character shadow d-flex align-items-center li-disabled" v-for="(ownedCarater, index) in owned.false" :class="{
               'li-active': selectCharacter == ownedCarater,
-            }"
-            @click="selectCharacter = ownedCarater"
-          >
+            }" @click="selectCharacter = ownedCarater">
             {{ characters[ownedCarater].name }}
             <smallLine :show="selectCharacter == ownedCarater" />
           </li>
@@ -89,25 +79,21 @@ ul {
               {{ characters[selectCharacter].name }}
             </h3>
             <div class="p-2">
-              <caracterStats
-                :character="characters[selectCharacter]"
-                v-if="selectCharacter"
-              />
+              <caracterStats :character="characters[selectCharacter]" v-if="selectCharacter" />
             </div>
           </div>
           <div class="rol">
             <div class="col-12 d-grid gap-2 pt-2">
               <button class="btn btn-primary btn-block" @click="handleClick">
-                <div
-                  v-if="
+                <div v-if="
                     !selectCharacter || characters[selectCharacter].owned == '1'
-                  "
-                >
+                  ">
                   Lancer un match
                 </div>
                 <div v-else>
                   Acheter le personnage •
                   {{ characters[selectCharacter].price }}
+                  <font-awesome-icon :icon="['fas', 'bitcoin-sign']" />
                 </div>
               </button>
             </div>
@@ -229,6 +215,7 @@ export default {
             1
           );
           this.characters[this.selectCharacter].owned = 1;
+          localStorage.setItem("money", response.data.money);
         })
         .catch((error) => {
           this.eventBus.emit("show-toast", error.response.data.messages.error);
