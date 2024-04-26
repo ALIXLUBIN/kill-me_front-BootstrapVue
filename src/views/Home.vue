@@ -111,6 +111,7 @@ import smallLine from "@/components/Lines/smallLines.vue";
 import caracterStats from "@/components/Battle/caracterStats.vue";
 import { socket } from "@/socket.js";
 import router from "@/router";
+import { state } from "@/socket.js";
 
 export default {
   name: "Home",
@@ -182,6 +183,10 @@ export default {
       }
     },
     launchMatch() {
+      if (!state.connected) {
+        this.eventBus.emit("show-toast", "Impossible de joindre le serveur");
+        return;
+      }
       auth
         .post("/joinBattle", { character_id: this.selectCharacter })
         .then((response) => {

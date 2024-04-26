@@ -14,7 +14,7 @@ const URL = process.env.VUE_APP_WS_IP;
 export const socket = io(URL, {
     withCredentials: true,
     reconnection: true,
-    reconnectionAttempts: 5,
+    // reconnectionAttempts: 5,
     reconnectionDelay: 500,
     reconnectionDelayMax: 5000,
   });

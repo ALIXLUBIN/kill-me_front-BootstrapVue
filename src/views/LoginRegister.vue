@@ -198,6 +198,8 @@ export default {
 
           socket.connect();
 
+          this.eventBus.emit("update-toastSocket");
+
           router.push("/");
         })
         .catch((error) => {

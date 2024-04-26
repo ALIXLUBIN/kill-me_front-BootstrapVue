@@ -32,7 +32,8 @@ auth.interceptors.response.use(
 	(response) => response,
 	(error) => {
 		if (error.response.status === 401 && error.response.data.messages === "Unauthenticated") {
-			router.push("/login"); 
+			sessionStorage.clear();
+			router.push("/login");
 		}
 		return Promise.reject(error);
 	}
