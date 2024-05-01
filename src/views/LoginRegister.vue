@@ -24,7 +24,7 @@
         <form action=""  @submit.prevent="submit">
           <div class="mb-3" v-for="(inpute, key) in inputes" :key="key">
             <label :for="inpute.name" class="form-label">{{
-              inpute.name
+              inpute.displayName
             }}</label>
             <input
               :id="inpute.name"
@@ -83,12 +83,14 @@ export default {
           type: "text",
           placeholder: "Entrez voutre pseudo",
           name: "username",
+          displayName: "Pseudo",
           value: "",
         },
         {
           type: "password",
           placeholder: "Enter your password",
           name: "password",
+          displayName: "Mot de passe",
           value: "",
         },
       ],
@@ -97,24 +99,28 @@ export default {
           type: "text",
           placeholder: "Enter your Nickname",
           name: "nickname",
+          displayName: "Pseudo",
           value: "",
         },
         {
           type: "email",
           placeholder: "Enter your email",
           name: "email",
+          displayName: "Email",
           value: "",
         },
         {
           type: "password",
           placeholder: "Enter your password",
           name: "password",
+          displayName: "Mot de passe",
           value: "",
         },
         {
           type: "password",
           placeholder: "Enter your password",
           name: "confirm_password",
+          displayName: "Cofirmation du mot de passe",
           value: "",
         },
       ],

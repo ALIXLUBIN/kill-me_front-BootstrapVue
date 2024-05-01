@@ -103,10 +103,19 @@ export default {
 
       })
       .catch((error) => {
-        console.log(error.response.data.messages);
-        if (error.response.data.messages.error == "notInGame") {
-          this.eventBus.emit("show-toast", "Vous n'êtes pas en jeu");
-          // this.$router.push('/');
+        console.log(error.response.data.messages.error);
+        if (error.response.data.messages.error){
+          switch (error.response.data.messages.error) {
+            case 'notInGame':
+              this.eventBus.emit("show-toast", "Vous n'êtes pas en jeu");
+              break;
+            case 'notEnoughMana':
+              this.eventBus.emit("show-toast", "Vous n'avez pas assez de mana");
+              break;
+            default:
+              this.eventBus.emit("show-toast", "Une erreur est survenue");
+              break;
+          }
         }
       });
   },
@@ -119,7 +128,25 @@ export default {
     },
 
     attack(id) {
-      auth.post("battle/attack/" + id);
+
+      auth.post("battle/attack/" + id).catch((error) => {
+        if (error.response.data.messages.error){
+          switch (error.response.data.messages.error) {
+            case 'notInGame':
+              this.eventBus.emit("show-toast", "Vous n'êtes pas en jeu");
+              break;
+            case 'notEnoughMana':
+              this.eventBus.emit("show-toast", "Vous n'avez pas assez de mana");
+              break;
+            case 'notYourTurn':
+              this.eventBus.emit("show-toast", "Ce n'est pas votre tour");
+              break;
+            default:
+              this.eventBus.emit("show-toast", "Une erreur est survenue");
+              break;
+          }
+        }
+      })
     },
 
   },

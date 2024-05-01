@@ -47,9 +47,9 @@ ul {
       </div>
     </div>
     <div class="row">
-      <div class="col-4 card-blur">
+      <div class="col-lg-4 col-12 card-blur">
         <h3>Vos personnages:</h3>
-        <p>Choisisez votre personnage ici</p>
+        <p>Choisissez votre personnage ici</p>
         <ul class="m-0">
           <li class="li-character shadow d-flex align-items-center" v-for="(ownedCarater, index) in owned.true" :class="{
               'li-active': selectCharacter == ownedCarater,
@@ -66,7 +66,7 @@ ul {
           </li>
         </ul>
       </div>
-      <div class="col-7 card-blur ms-3">
+      <div class="col-lg-7 ms-lg-3 col-12 mt-3 mt-lg-0 card-blur">
         <div class="row">
           <div class="col-12 text-center">
             <h3>Lancer un match</h3>
@@ -112,12 +112,14 @@ import caracterStats from "@/components/Battle/caracterStats.vue";
 import { socket } from "@/socket.js";
 import router from "@/router";
 import { state } from "@/socket.js";
+import PlayerCard from "@/components/Battle/PlayerCard.vue";
 
 export default {
   name: "Home",
   components: {
     BackGround,
     smallLine,
+    PlayerCard,
     caracterStats,
   },
   data() {

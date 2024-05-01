@@ -130,7 +130,7 @@ svg {
           <div class="col-auto" v-show="attack.text">
             {{ attack.text }}
           </div>
-          <div class="col-auto" v-show="attack.heal > 0" title="Vous fait regagnier des PV">
+          <div class="col-auto" v-show="attack.heal > 0" title="Vous fait regagner des PV">
             <font-awesome-icon :icon="['fas', 'heart']" />
             +{{ attack.heal }}
           </div>
@@ -138,11 +138,11 @@ svg {
             <font-awesome-icon :icon="['fas', 'wand-sparkles']" />
             -{{ attack.manaCost }}
           </div>
-          <div class="col-auto" v-show="attack.damage > 0" title="Dégas infligé par l'attaque">
+          <div class="col-auto" v-show="attack.damage > 0" title="Dégas infligés par l'attaque">
             <font-awesome-icon :icon="['fas', 'hand-back-fist']" />
             {{ attack.damage }}
           </div>
-          <div class="col-auto" v-show="attack.shieldPiercing > 0" title="Pourcentage de bouclier ennmie ignoré">
+          <div class="col-auto" v-show="attack.shieldPiercing > 0" title="Pourcentage de bouclier ennemi ignoré">
             <font-awesome-icon :icon="['fas', 'shield-virus']" />
             {{ attack.shieldPiercing }}%
           </div>
@@ -206,9 +206,21 @@ export default {
       }
       auth.post('battle/attack/' + id).catch((error) => {
 
-        if (error.response.data.messages.error == "notYourTrun") {
-          this.eventBus.emit("show-toast", "Ce n'est pas votre tour.");
-          // this.$router.push('/');
+        if (error.response.data.messages.error) {
+          switch (error.response.data.messages.error) {
+            case 'notInGame':
+              this.eventBus.emit("show-toast", "Vous n'êtes pas en jeu");
+              break;
+            case 'notEnoughMana':
+              this.eventBus.emit("show-toast", "Vous n'avez pas assez de mana");
+              break;
+            case 'notYourTurn':
+              this.eventBus.emit("show-toast", "Ce n'est pas votre tour");
+              break;
+            default:
+              this.eventBus.emit("show-toast", "Une erreur est survenue");
+              break;
+          }
         }
       });
     },

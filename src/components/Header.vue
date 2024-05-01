@@ -85,9 +85,9 @@ nav {
         <li class="nav-item" v-show="!isLoggedIn">
           <RouterLink to="/register" class="nav-link"> Register </RouterLink>
         </li>
-        <li class="nav-item" v-show="isLoggedIn">
+        <!-- <li class="nav-item" v-show="isLoggedIn">
           <RouterLink to="/profile" class="nav-link"> Profile </RouterLink>
-        </li>
+        </li> -->
       </ul>
     </div>
 
@@ -107,6 +107,12 @@ export default {
     isLoggedIn() {
       return sessionStorage.getItem("logged") === "true";
     },
+  },
+
+  mounted() {
+    this.eventBus.on("update-toastSocket", (value) => {
+      this.isLoggedIn = sessionStorage.getItem("logged");
+    });
   },
 };
 </script>

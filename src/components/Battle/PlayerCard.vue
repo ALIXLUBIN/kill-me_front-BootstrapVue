@@ -10,20 +10,25 @@
 	left: 20px;
 	top: 20px;
 	backdrop-filter: blur(2px);
-	mask-image: linear-gradient(
+	/* mask-image: linear-gradient(
 		to bottom,
 		transparent 0%,
 		black 10%,
 		black 90%,
 		transparent 100%
-	);
+	); */
 	padding: 5px;
+}
+
+.character-name *,
+.character-name {
+	text-shadow: rgb(252, 251, 249) 0 0 5px;
 }
 </style>
 
 <template>
 	<span class="character">
-		<h2 class="character-name">{{ character.name }} - <span class="fw-lighter">{{ character.nickname }}</span></h2>
+		<h2 class="character-name">{{ character.name }} - <span class="fw-light">{{ character.nickname }}</span></h2>
 	</span>
 	<div class="container-fuid card-blur">
 		<caracterStats :character="character" />

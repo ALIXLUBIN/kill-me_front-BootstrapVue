@@ -1,9 +1,16 @@
+<style>
+#toast {
+  z-index: 1000;
+}
+</style>
+
 <template>
   <div
-    class="toast position-absolute end-0 m-2 align-items-center text-white border-0"
+    class="toast position-fixed end-0 me-2 m-2 align-items-center text-white border-0 showToast"
     :class="{
       show: showToast,
     }"
+    id="toast"
     v-bind:class="'bg-' + color"
     role="alert"
     aria-live="assertive"

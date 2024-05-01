@@ -35,11 +35,11 @@ const routes = [
 		name: "endGame",
 		component: () => import("../views/endGame.vue"),
 	},
-	{
-		path: "/profile",
-		name: "profile",
-		component: () => import("../views/Profile.vue"),
-	},
+	// {
+	// 	path: "/profile",
+	// 	name: "profile",
+	// 	component: () => import("../views/Profile.vue"),
+	// },
 	{
 		path: "/admin",
 		name: "admin",
